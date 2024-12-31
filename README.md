@@ -14,7 +14,7 @@ A simplified Google Keep clone built with React, Redux, Firebase, and Material-U
     - Delete notes that are no longer needed
     - Notes are persistently stored using Firebase Firestore
 - **Organization and Search:**
-    - Categorize notes (Work, Study, Travel)
+    - Categorize notes (Work, Study, personal,health, shopping,tasks,ideas)
     - Color-coded notes based on categories
     - Real-time search functionality to quickly find notes
 - **Responsive Design:**
