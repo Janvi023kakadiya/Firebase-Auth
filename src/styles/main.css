@@ -1,0 +1,73 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f5f5f5;
+  }
+  
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+  
+  /* Animations */
+  .fade-enter {
+    opacity: 0;
+  }
+  
+  .fade-enter-active {
+    opacity: 1;
+    transition: opacity 300ms ease-in;
+  }
+  
+
+  .fade-exit-active {
+    opacity: 0;
+    transition: opacity 300ms ease-in;
+  }
+  
+
+  .note-card {
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .note-card:hover {
+    transform: translateY(-4px);
+  }
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Roboto', sans-serif;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Theme transition effects */
+  .MuiPaper-root,
+  .MuiCard-root,
+  .MuiAppBar-root {
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  /* Rest of your CSS... */
+  
