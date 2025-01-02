@@ -1,26 +1,25 @@
 import React, { useState } from 'react';
-
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
-import { registerUser } from '../../features/auth/authSlice';
-import { 
-  Container, 
-  Paper, 
-  TextField, 
-  Button, 
+import { registerUser, signInWithGoogle } from '../../features/auth/authSlice';
+import {
+  Container,
+  Paper,
+  TextField,
+  Button,
   Typography,
   Alert,
-  CircularProgress 
+  CircularProgress,
 } from '@mui/material';
 
 const Register = () => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
   });
   const [error, setError] = useState('');
-  
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { loading } = useSelector((state) => state.auth);
@@ -28,7 +27,7 @@ const Register = () => {
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -46,13 +45,25 @@ const Register = () => {
     }
 
     try {
-      await dispatch(registerUser({ 
-        email: formData.email, 
-        password: formData.password 
-      })).unwrap();
-      navigate('/'); 
+      await dispatch(
+        registerUser({
+          email: formData.email,
+          password: formData.password,
+        })
+      ).unwrap();
+      navigate('/'); // Redirect to the homepage after successful registration
     } catch (err) {
       setError(err.message || 'Registration failed');
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    try {
+      await dispatch(signInWithGoogle()).unwrap();
+      navigate('/'); // Redirect to the homepage after successful Google Sign-In
+    } catch (error) {
+      console.error('Google Sign-In failed:', error);
+      setError(error.message || 'Google Sign-In failed');
     }
   };
 
@@ -62,7 +73,7 @@ const Register = () => {
         <Typography variant="h4" align="center" gutterBottom>
           Register
         </Typography>
-        
+
         {error && (
           <Alert severity="error" sx={{ mb: 2 }}>
             {error}
@@ -70,6 +81,7 @@ const Register = () => {
         )}
 
         <form onSubmit={handleSubmit}>
+          {/* Email Input */}
           <TextField
             fullWidth
             label="Email"
@@ -80,6 +92,7 @@ const Register = () => {
             margin="normal"
             required
           />
+          {/* Password Input */}
           <TextField
             fullWidth
             label="Password"
@@ -90,6 +103,7 @@ const Register = () => {
             margin="normal"
             required
           />
+          {/* Confirm Password Input */}
           <TextField
             fullWidth
             label="Confirm Password"
@@ -100,6 +114,7 @@ const Register = () => {
             margin="normal"
             required
           />
+          {/* Register Button */}
           <Button
             fullWidth
             type="submit"
@@ -114,7 +129,25 @@ const Register = () => {
               'Register'
             )}
           </Button>
-          
+
+          {/* Google Sign-In Button */}
+          <Button
+            fullWidth
+            variant="contained"
+            color="primary"
+            startIcon={
+              <img
+                src="https://img.freepik.com/premium-photo/google-logo-white-background_1315971-1888.jpg"
+                alt="Google Sign-In"
+                style={{ width: '20px' }}
+              />
+            }
+            onClick={handleGoogleSignIn}
+            sx={{ mt: 2 }}
+          >
+            Sign in with Google
+          </Button>
+
           <Typography align="center" sx={{ mt: 2 }}>
             Already have an account?{' '}
             <Link to="/login" style={{ textDecoration: 'none' }}>
